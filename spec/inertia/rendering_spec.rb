@@ -1,11 +1,13 @@
 RSpec.describe 'rendering inertia views', type: :request do
   subject { response.body }
 
+  let(:controller) { ApplicationController.new }
+
   context 'first load' do
-    let(:page) { InertiaRails::Renderer.new('TestComponent', '', request, response, '', props: nil, view_data: nil).send(:page) }
     
+    let(:page) { InertiaRails::Renderer.new('TestComponent', controller, request, response, '', props: nil, view_data: nil).send(:page) }
     context 'with props' do
-      let(:page) { InertiaRails::Renderer.new('TestComponent', '', request, response, '', props: {name: 'Brandon', sport: 'hockey'}, view_data: nil).send(:page) }
+      let(:page) { InertiaRails::Renderer.new('TestComponent', controller, request, response, '', props: {name: 'Brandon', sport: 'hockey'}, view_data: nil).send(:page) }
       before { get props_path }
 
       it { is_expected.to include inertia_div(page) }
@@ -31,7 +33,7 @@ RSpec.describe 'rendering inertia views', type: :request do
   end
 
   context 'subsequent requests' do
-    let(:page) { InertiaRails::Renderer.new('TestComponent', '', request, response, '', props: {name: 'Brandon', sport: 'hockey'}, view_data: nil).send(:page) }
+    let(:page) { InertiaRails::Renderer.new('TestComponent', controller, request, response, '', props: {name: 'Brandon', sport: 'hockey'}, view_data: nil).send(:page) }
     let(:headers) { {'X-Inertia' => true} }
 
     before { get props_path, headers: headers }
