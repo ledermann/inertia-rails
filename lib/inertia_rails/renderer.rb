@@ -29,7 +29,7 @@ module InertiaRails
     def props
       only = (@request.headers['X-Inertia-Partial-Data'] || '').split(',').compact.map(&:to_sym)
 
-      _props = ::InertiaRails.shared_data(@controller).merge(@props)
+      _props = @controller.shared_data.merge(@props)
 
       _props = (only.any? && @request.headers['X-Inertia-Partial-Component'] == component) ?
         _props.select {|key| key.in? only} :
