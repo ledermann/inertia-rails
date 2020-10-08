@@ -33,4 +33,12 @@ class InertiaTestController < ApplicationController
   def redirect_to_share_test
     redirect_to share_path
   end
+
+  def error_404
+    render inertia: 'ErrorComponent', status: 404
+  end
+
+  def error_500
+    render inertia: 'ErrorComponent', status: 500
+  end
 end

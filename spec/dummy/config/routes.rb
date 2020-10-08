@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   delete 'redirect_test' => 'inertia_test#redirect_test'
   get 'my_location' => 'inertia_test#my_location'
   post 'redirect_to_share_test' => 'inertia_test#redirect_to_share_test'
+  get 'error_404' => 'inertia_test#error_404'
+  get 'error_500' => 'inertia_test#error_500'
 end
