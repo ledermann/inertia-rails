@@ -61,4 +61,14 @@ RSpec.describe 'using inertia share when rendering views', type: :request do
       get response.location, headers: {'X-Inertia' => true}
     end
   end
+
+  context 'using inertia share with exception handler' do
+    let(:props) { { status: 500 } }
+
+    before do
+      get error_path, headers: {'X-Inertia' => true}
+    end
+
+    it { is_expected.to eq props }
+  end
 end
