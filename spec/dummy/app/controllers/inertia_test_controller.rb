@@ -26,12 +26,11 @@ class InertiaTestController < ApplicationController
   # Calling it my_location to avoid this in Rails 5.0
   # https://github.com/rails/rails/issues/28033
   def my_location
-    puts "Got to location for some reason?"
     inertia_location empty_test_path
   end
 
-  def redirect_to_share_test
-    redirect_to share_path
+  def redirect_with_inertia_errors
+    redirect_to empty_test_path, inertia: { errors: { uh: 'oh' } }
   end
 
   def error_404
@@ -47,5 +46,9 @@ class InertiaTestController < ApplicationController
       format.html { render inertia: 'EmptyTestComponent' }
       format.xml { render xml: [ 1, 2, 3 ] }
     end
+  end
+
+  def redirect_to_share_test
+    redirect_to share_path
   end
 end

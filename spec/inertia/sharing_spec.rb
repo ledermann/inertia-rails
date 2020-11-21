@@ -38,6 +38,19 @@ RSpec.describe 'using inertia share when rendering views', type: :request do
     it { is_expected.to eq props }
   end
 
+  context 'with errors' do
+    let(:props) { {name: 'Brandon', sport: 'hockey', position: 'center', number: 29} }
+    let(:errors) { 'rearview mirror is present' }
+    before {
+      allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
+        { inertia_errors: errors }
+      }
+      get share_path, headers: {'X-Inertia' => true}
+    }
+
+    it { is_expected.to eq props.merge({ errors: errors }) }
+  end
+
   context 'using inertia share in redirected requests' do
     let(:props) { {name: 'Brandon', sport: 'hockey', position: 'center', number: 29} }
 
@@ -47,6 +60,16 @@ RSpec.describe 'using inertia share when rendering views', type: :request do
 
       get response.location, headers: {'X-Inertia' => true}
     end
+  end
+
+  context 'using inertia share with exception handler' do
+    let(:props) { { status: 500 } }
+
+    before do
+      get error_path, headers: {'X-Inertia' => true}
+    end
+
+    it { is_expected.to eq props }
   end
 
   context 'using inertia share with exception handler' do
