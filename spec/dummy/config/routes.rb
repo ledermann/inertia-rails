@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   get 'error_404' => 'inertia_test#error_404'
   get 'error_500' => 'inertia_test#error_500'
   get 'content_type_test' => 'inertia_test#content_type_test'
+  get 'lazy_props' => 'inertia_render_test#lazy_props'
   post 'redirect_to_share_test' => 'inertia_test#redirect_to_share_test'
 end

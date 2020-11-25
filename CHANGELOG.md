@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.1] - 2020-11-24
+
+* Fix the definition for InertiaRails::Lazy to avoid an uninitialized constant error when booting an application. 
+
+## [1.7.0] - 2020-11-24
+
+* Add support for "lazy" props while rendering. These are props that never compute on the initial page load. The only render during a partial update that calls for them explicitly.
+
 ## [1.6.0] - 2020-11-20
 
 * Built in error sharing across redirects! adding `{ inertia: { errors: 'errors go here' } }` as an option in `redirect_to` will automatically feed an `errors` prop to whatever is rendered after the redirect.
